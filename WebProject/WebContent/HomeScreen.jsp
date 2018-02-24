@@ -19,7 +19,7 @@
       <form action = "Login.jsp" method = "POST">
          <input type = "submit" value = "Log in in your account" />
       </form>
-      <p></p>
+      <p>Hello World!</p>
       <%
       	}
       	else {
