@@ -1,27 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ page import="JDBC.*"%>
+<%@ page import="java.sql.*"%>
+<%@ page import="java.io.*"%>
+<%@ page import="java.util.*"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Welcome to the home screen</title>
-<link rel="stylesheet" type="text/css" href="Style.css">
+<title>Getting data</title>
+
 </head>
-<h1>Please select your action:</h1>
+
 <body>
-
-	<%
-		if (session.isNew()) {
-	%>
-	<form action="NewRegister.jsp" method="POST">
-		<input type="submit" value="Register new account" />
-	</form>
-	<form action="Login.jsp" method="POST">
-		<input type="submit" value="Log in in your account" />
-	</form>
-
-	<%
-		} else {
-	%>
 	<div id="nav">
 		<ul>
 			<li><a href="http://localhost:8080/WebProject/HomeScreen.jsp">Home</a></li>
@@ -34,9 +25,42 @@
 		</ul>
 	</div>
 
-	<%
-		}
-	%>
+	<table border="2">
+		<tr>
+			<th>Real name</th>
+			<th>Email</th>
+			<th>Date of Birth</th>
+		</tr>
+		<%
+			String username = (String) session.getAttribute("username");
+			PhoneGarden run = new PhoneGarden();
+			ResultSet rs = run.get(username);
+			while (rs.next()) {
+		%>
+		<tr>
+			<td>
+				<%
+					out.println(rs.getString("RealName"));
+				%>
+			</td>
+			<td>
+				<%
+					out.println(rs.getString("DOB"));
+				%>
+			</td>
+			<td>
+				<%
+					out.println(rs.getString("Email"));
+				%>
+			</td>
+
+		</tr>
+
+
+		<%
+			}
+		%>
+	</table>
 
 </body>
 </html>

@@ -4,11 +4,10 @@
 <html>
 	<head>
       <title>Login into your account:</title>
-      <link rel="stylesheet" type="text/css" href="Style.css">
    </head>
    <body>
       
-      <form action = "LoginRecord.jsp" method = "POST">
+      <form action = "LoginRecordAdmin.jsp" method = "POST">
          Username: <input type = "text" name = "username">
          <br />
          Password: <input type = "password" name = "password" />
