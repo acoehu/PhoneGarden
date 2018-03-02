@@ -4,9 +4,24 @@
 <html>
 <head>
 <title>Welcome to the home screen</title>
+<%@ page import="JDBC.*"%>
+<%@ page import="java.sql.*"%>
+<%@ page import="java.io.*"%>
+<%@ page import="java.util.*"%>
 <link rel="stylesheet" type="text/css" href="Style.css">
 </head>
 <h1>Please select your action:</h1>
+<script>
+	function Test() {
+		alert("GREAT");
+	}
+</script>
+<style>
+#cart {
+	float: right;
+	color: pink;
+}
+</style>
 <body>
 
 	<%
@@ -33,6 +48,13 @@
 			<li><a href="http://localhost:8080/WebProject/Logout.jsp">Logout</a></li>
 		</ul>
 	</div>
+	<a id='cart' href="http://localhost:8080/WebProject/Cart.jsp"><h3>
+			Cart:
+			<%
+		Queue<Integer> totalNum = (LinkedList<Integer>) session.getAttribute("totalNum");
+			out.println(totalNum.peek());
+	%>
+		</h3></a>
 
 	<%
 		}

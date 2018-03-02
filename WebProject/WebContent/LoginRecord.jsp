@@ -13,7 +13,7 @@
 </head>
 
 <body>
-	<h1>Attempting to login..</h1>
+	<h1>Attempting to login..</h1>	
 	<p>
 		<%
 			String username = request.getParameter("username");

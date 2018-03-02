@@ -10,12 +10,6 @@
 <head>
 <title>Getting data</title>
 <link rel="stylesheet" type="text/css" href="Style.css">
-<style>
-#cart {
-	float: right;
-	color: pink;
-}
-</style>
 </head>
 
 <body>
@@ -38,39 +32,35 @@
 			<li><a href="http://localhost:8080/WebProject/Logout.jsp">Logout</a></li>
 		</ul>
 	</div>
-	<a id='cart' href="http://localhost:8080/WebProject/Cart.jsp"><h3>
-			Cart:
-			<%
-		Queue<Integer> totalNum = (LinkedList<Integer>) session.getAttribute("totalNum");
-			out.println(totalNum.peek());
-	%>
-		</h3></a>
+
 	<table border="2">
 		<tr>
-			<th>Real name</th>
-			<th>Email</th>
-			<th>Date of Birth</th>
+			<th>Phone</th>
+			<th>Quantity</th>
+			<th>Price</th>
 		</tr>
 		<%
-			String username = (String) session.getAttribute("username");
 			PhoneGarden run = new PhoneGarden();
-			ResultSet rs = run.get(username);
-			while (rs.next()) {
+				Map<String, Integer> map = (HashMap<String, Integer>) session.getAttribute("map");
+				Queue<Integer> totalNum = (LinkedList<Integer>) session.getAttribute("totalNum");
+				Queue<Double> totalPrice = (LinkedList<Double>) session.getAttribute("totalPrice");
+				for (Map.Entry<String, Integer> k : map.entrySet()) {
 		%>
 		<tr>
 			<td>
 				<%
-					out.println(rs.getString("RealName"));
+					out.println(k.getKey());
 				%>
 			</td>
 			<td>
 				<%
-					out.println(rs.getString("DOB"));
+					out.println(k.getValue());
 				%>
 			</td>
 			<td>
 				<%
-					out.println(rs.getString("Email"));
+					Phone phone = run.phone(k.getKey());
+							out.println((double) phone.price * k.getValue());
 				%>
 			</td>
 
@@ -80,9 +70,22 @@
 		<%
 			}
 		%>
+		<tr>
+			<td>Total</td>
+			<td>
+				<%
+					out.println(totalNum.peek());
+				%>
+			</td>
+			<td>
+				<%
+					out.println(totalPrice.peek());
+				%>
+			</td>
+		</tr>
 	</table>
-	<%}
-	
+	<%
+		}
 	%>
 
 </body>

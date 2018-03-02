@@ -9,10 +9,24 @@
 <html>
 <head>
 <title>Getting data</title>
-
+<link rel="stylesheet" type="text/css" href="Style.css">
+<style>
+#cart {
+	float: right;
+	color: pink;
+}
+</style>
 </head>
 
 <body>
+	<%
+		if (session.isNew()) {
+			session.invalidate();
+			String site = new String("http://localhost:8080/WebProject/HomeScreen.jsp");
+			response.setStatus(response.SC_MOVED_TEMPORARILY);
+			response.setHeader("Location", site);
+		} else {
+	%>
 	<div id="nav">
 		<ul>
 			<li><a href="http://localhost:8080/WebProject/HomeScreen.jsp">Home</a></li>
@@ -24,7 +38,13 @@
 			<li><a href="http://localhost:8080/WebProject/Logout.jsp">Logout</a></li>
 		</ul>
 	</div>
-
+	<a id='cart' href="http://localhost:8080/WebProject/Cart.jsp"><h3>
+			Cart:
+			<%
+		Queue<Integer> totalNum = (LinkedList<Integer>) session.getAttribute("totalNum");
+			out.println(totalNum.peek());
+	%>
+		</h3></a>
 	<table border="2">
 		<tr>
 			<th>Real name</th>
@@ -61,6 +81,9 @@
 			}
 		%>
 	</table>
+	<%}
+	
+	%>
 
 </body>
 </html>

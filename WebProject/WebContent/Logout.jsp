@@ -9,6 +9,7 @@
 <html>
 <head>
 <title>Logging out</title>
+<link rel="stylesheet" type="text/css" href="Style.css">
 </head>
 
 <body>
